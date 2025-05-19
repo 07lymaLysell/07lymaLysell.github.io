@@ -79,7 +79,32 @@ function setOperator(operator) {
  * Beräknar ovh visar resultatet på displayen.
  */
 function calculate() {
-    
+    let current = parseFloat(lcd.value); // det andra talet
+    let result = 0;                        // börjar såklart som noll
+
+    switch(arithmetic){
+        case '+':
+            result = memory + current;
+            break;
+        case '-':
+            result = memory - current;
+            break;
+        case '*':
+            result = memory * current;
+            break;
+        case '/':
+            if(current !== 0){
+                result = memory / current;
+            }else {
+                lcd.value = "ERROR, noll division";
+            }
+            break;
+            default:
+    }
+        lcd.value =result.toString();
+        isComma = lcd.value.includes(',');
+        memory = 0;
+        arithmetic = null;
 }
 
 /** Rensar display */
