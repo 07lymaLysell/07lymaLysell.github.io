@@ -15,29 +15,38 @@ function init() {
  * Händelsehanterare för kalkylatorns tangentbord
  */
 function buttonClick(e) {
-    let btn = e.target.id; //id för den tangent som tryckte ner
+    let btn = e.target.id;                                        //id för den tangent som tryckte ner
 
     // kollar om siffertangent är nedtryckt
     if (btn.substring(0, 1) === 'b') {
-        let digit = btn.substring(1, 2); // plolcd.value =0; ckar ut siffran från id:et
+        let digit = btn.substring(1, 2);               // plolcd.value =0; ckar ut siffran från id:et
         addDigit(digit);
-
-    } else if (btn === 'comma') { // inte en siffertangent, övriga tangenter.
-
-        addComma();
-
-    } else if (btn === 'clear') {
-        memClear();
-    } else if (btn === 'equals') {
-        calculate()
-    }else if(btn === 'plus'){
-        setOperator('+');
-    }else if(btn === 'minus'){
-        setOperator('-');
-    }else if(btn === 'mul'){
-        setOperator('*');
-    }else if(btn === 'div'){
-        setOperator('/');
+    } else {                                          // inte en siffertangent, övriga tangenter. if (btn === 'comma')
+        //addComma();
+        switch (btn) {
+            case 'add':
+                setOperator('+');
+                break;
+            case 'sub':
+                setOperator('-');
+                break;
+            case 'mul':
+                setOperator('*');
+                break;
+            case 'div':
+                setOperator('/');
+                break;
+            case 'spec':
+                memClear();
+                break;
+            case 'enter':
+                calculate();
+                break;
+            case 'comma':
+                addComma();
+                break;
+        }
+        console.log(arithmetic);
     }
 }
 
@@ -70,9 +79,9 @@ function addComma() {
  * +, -, *, /
  */
 function setOperator(operator) {
-   memory = parseFloat(lcd.value);
-   arithmetic = operator;
-   clearLCD(); 
+    memory = parseFloat(lcd.value);
+    arithmetic = operator;
+    clearLCD();
 }
 
 /**
@@ -82,7 +91,7 @@ function calculate() {
     let current = parseFloat(lcd.value); // det andra talet
     let result = 0;                        // börjar såklart som noll
 
-    switch(arithmetic){
+    switch (arithmetic) {
         case '+':
             result = memory + current;
             break;
@@ -93,18 +102,14 @@ function calculate() {
             result = memory * current;
             break;
         case '/':
-            if(current !== 0){
+            if (current !== 0) {
                 result = memory / current;
-            }else {
+            } else {
                 lcd.value = "ERROR, noll division";
             }
             break;
-            default:
     }
-        lcd.value =result.toString();
-        isComma = lcd.value.includes(',');
-        memory = 0;
-        arithmetic = null;
+    lcd.value = result
 }
 
 /** Rensar display */
