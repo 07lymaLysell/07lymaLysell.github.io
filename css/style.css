@@ -61,6 +61,9 @@ button:hover{
 button.spec{
     color: rgb(25, 201, 201);
 }
+button{
+    font-weight: 900;
+}
 @media (max-width: 767px) {
     body {
 
