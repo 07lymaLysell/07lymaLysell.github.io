@@ -70,14 +70,16 @@ function addComma() {
  * +, -, *, /
  */
 function setOperator(operator) {
-   
+   memory = parseFloat(lcd.value);
+   arithmetic = operator;
+   clearLCD(); 
 }
 
 /**
  * Beräknar ovh visar resultatet på displayen.
  */
 function calculate() {
-
+    
 }
 
 /** Rensar display */
