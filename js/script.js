@@ -1,28 +1,28 @@
-
-let lcd = null; // displayen
-let isComma = false;
-let memory = 0; // Lagrat/gamlat värdet från display
-let arithmetic = null; // Vilken beräkning som skall göras +,-, x eller /
+let lcd = null;                   // Referens till displayfältet
+let isComma = false;              // Anger om ett decimaltecken har lagts till
+let memory = 0;                   // (Ej aktiv) Tidigare sparat värde
+let arithmetic = null;            // (Ej aktiv) Sparad operator
+let infoDisplay = null;           // Visar tidigare uträkning och resultat
+let calculationString = "";       // Håller hela uttrycket som en sträng
 
 function init() {
-    lcd = document.getElementById('lcd'); // hämtar input fältet
-    let keyBoard = document.getElementById('keyBoard') // hämtar hela knappraden
-    keyBoard.onclick = buttonClick; // kopplar klick till funktion 
-    clearLCD();
+    lcd = document.getElementById('lcd');             // Hämtar displayelementet
+    infoDisplay = document.getElementById('infoDisplay'); // Hämtar info-display
+    let keyBoard = document.getElementById('keyBoard');   // Hämtar knappraden
+    keyBoard.onclick = buttonClick;                   // Kopplar alla knappar till funktionen
+    clearLCD();                                       // Nollställer displayen
 }
 
 /**
- * Händelsehanterare för kalkylatorns tangentbord
+ * Hanterar knapptryckningar från kalkylatorn
  */
 function buttonClick(e) {
-    let btn = e.target.id;                                        //id för den tangent som tryckte ner
+    let btn = e.target.id;  // Hämtar id på den knapp som tryckts
 
-    // kollar om siffertangent är nedtryckt
     if (btn.substring(0, 1) === 'b') {
-        let digit = btn.substring(1, 2);               // plolcd.value =0; ckar ut siffran från id:et
+        let digit = btn.substring(1, 2);  // Extraherar siffran från id:t, t.ex. b5 → "5"
         addDigit(digit);
-    } else {                                          // inte en siffertangent, övriga tangenter. if (btn === 'comma')
-        //addComma();
+    } else {
         switch (btn) {
             case 'add':
                 setOperator('+');
@@ -36,7 +36,7 @@ function buttonClick(e) {
             case 'div':
                 setOperator('/');
                 break;
-            case 'spec':
+            case 'clear':
                 memClear();
                 break;
             case 'enter':
@@ -46,84 +46,78 @@ function buttonClick(e) {
                 addComma();
                 break;
         }
-        console.log(arithmetic);
     }
 }
 
 /**
-* Se detta som en grund att utgå ifrån.
-* Det är helt fritt att ändra och ta bort kod om ni
-* isComma = true;
-} önskar lösa problemen med andra metoder.
-*/
-
+ * Lägger till en siffra till uttrycket och uppdaterar displayen
+ */
 function addDigit(digit) {
     if (lcd.value == '0') {
         lcd.value = digit;
     } else {
         lcd.value += digit;
     }
+    calculationString += digit;     // Lägger till siffran till beräkningssträngen
+    lcd.value = calculationString;  // Visar uppdaterad sträng på displayen
 }
+
 /**
- * Lägger till decimaltecken
+ * Lägger till ett decimaltecken om det inte redan finns
  */
 function addComma() {
     if (!isComma) {
         lcd.value += '.';
+        calculationString += '.';   // Lägger till decimal i beräkningssträngen
         isComma = true;
     }
 }
 
 /**
- * Sparar operator.
- * +, -, *, /
+ * Lägger till vald operator till uttrycket och uppdaterar displayen
  */
 function setOperator(operator) {
-    memory = parseFloat(lcd.value);
-    arithmetic = operator;
-    clearLCD();
+    if (lcd.value !== "") {
+        calculationString += " " + operator + " ";  // Lägger till operator med mellanslag
+        lcd.value = calculationString;              // Uppdaterar displayen
+        isComma = false;                            // Tillåter ny decimal i nästa tal
+    }
 }
 
 /**
- * Beräknar ovh visar resultatet på displayen.
+ * Räknar ut hela uttrycket och visar resultatet
  */
 function calculate() {
-    let current = parseFloat(lcd.value); // det andra talet
-    let result = 0;                        // börjar såklart som noll
-
-    switch (arithmetic) {
-        case '+':
-            result = memory + current;
-            break;
-        case '-':
-            result = memory - current;
-            break;
-        case '*':
-            result = memory * current;
-            break;
-        case '/':
-            if (current !== 0) {
-                result = memory / current;
-            } else {
-                lcd.value = "ERROR, noll division";
-            }
-            break;
+    try {
+        let result = eval(calculationString);  // Utför beräkningen
+        lcd.value = result;                    // Visar resultatet
+        infoDisplay.textContent = calculationString + " = " + result; // Visar hela uträkningen
+        calculationString = result.toString(); // Startar om med resultatet som bas
+    } catch (error) {
+        lcd.value = "ERROR";
+        infoDisplay.textContent = "Invalid Calculation"; // Felmeddelande vid ogiltigt uttryck
     }
-    lcd.value = result
 }
 
-/** Rensar display */
+/**
+ * Rensar endast displayen
+ */
 function clearLCD() {
     lcd.value = '0';
     isComma = false;
-
 }
 
-/** Rensar allt, reset */
+/**
+ * Rensar hela kalkylatorn inklusive uttryck och historik
+ */
 function memClear() {
     memory = 0;
     arithmetic = null;
+    calculationString = "";
     clearLCD();
+    if (infoDisplay) {
+        infoDisplay.textContent = "";
+    }
 }
 
-window.onload = init;
+window.onload = init; //initierar kalkylatorn när sidan laddas
