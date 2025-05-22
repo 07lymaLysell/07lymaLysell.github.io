@@ -88,14 +88,35 @@ function setOperator(operator) {
  * Räknar ut hela uttrycket och visar resultatet
  */
 function calculate() {
-    try {
-        let result = eval(calculationString);  // Utför beräkningen
-        lcd.value = result;                    // Visar resultatet
-        infoDisplay.textContent = calculationString + " = " + result; // Visar hela uträkningen
-        calculationString = result.toString(); // Startar om med resultatet som bas
-    } catch (error) {
-        lcd.value = "ERROR";
-        infoDisplay.textContent = "Invalid Calculation"; // Felmeddelande vid ogiltigt uttryck
+    try{
+        const tokens = calculationString.split(" "); //ska dela upp strängen i delar
+        const operators = ['*', '/', '+', '-']; //förklarar operatörerna
+
+        for(let op of ['*', '/', '+', '-']){
+            while (tokens.includes(op)){
+                const index = tokens.indexOf(op); // hittade index av operatören
+                const left = parseFloat(tokens[index - 1]);
+                const right = parseFloat(tokens[index + 1]);
+                const result;
+
+                switch (op){
+                    case '*':
+                        result = left * right;
+                        break;
+                        case '/':
+                        result = left / right;
+                        break;
+                        case '+':
+                        result = left + right;
+                        break;
+                        case '-':
+                        result = left - right;
+                        break;
+                }
+                tokens.splice(index - 1, 3, result);  // tar bort delarna och lägger till resultaten
+            }
+        }
+        const finalResult = tokens[0]; // slutliga resultatet 
     }
 }
 
