@@ -19,7 +19,7 @@ function init() {
 function buttonClick(e) {
     let btn = e.target.id;  // Hämtar id på den knapp som tryckts
 
-    if (btn.substring(0, 1) === 'b') {
+    if (btn.substring(0, 1) === 'b') {  // läser endast bokstaven "b"
         let digit = btn.substring(1, 2);  // Extraherar siffran från id:t, t.ex. b5 → "5"
         addDigit(digit);
     } else {
@@ -78,9 +78,9 @@ function addComma() {
  */
 function setOperator(operator) {
     if (lcd.value !== "") {
-        calculationString += " " + operator + " ";  // Lägger till operator med mellanslag
+        calculationString += " " + operator + " ";  // Lägger till operator med mellanslag,,, SUPER VIKTIGT!!
         lcd.value = calculationString;              // Uppdaterar displayen
-        isComma = false;                            // Tillåter ny decimal i nästa tal
+        isComma = false;                            // Tillåter ny decimal i nästa tal, också EXTREMT viktigt
     }
 }
 
