@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css?v=1.8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -16,32 +15,31 @@
             <div id="infoDisplay"></div>
         <input type="text" id = 'lcd' disabled="disabled">
         <section id = 'keyBoard'>
-            <button id='b7' >7</button> <!--döpte om knapparna till b1, b2 osv för att lättare kunna referera till dem i js -->
-            <button id='b8'>8</button>
-            <button id='b9'>9</button>
-            <button id='add' class="spec">+</button>
+            <button id='b7' type="button" >7</button> <!--döpte om knapparna till b1, b2 osv för att lättare kunna referera till dem i js -->
+            <button id='b8' type="button">8</button>
+            <button id='b9' type="button">9</button>
+            <button id='add' class="spec" type="button">+</button>
 
-            <button id='b4'>4</button>
-            <button id='b5'>5</button>
-            <button id='b6'>6</button>
-            <button id='sub'class="spec">-</button>
+            <button id='b4' type="button">4</button>
+            <button id='b5' type="button">5</button>
+            <button id='b6' type="button">6</button>
+            <button id='sub'class="spec" type="button">-</button>
 
-            <button id='b1'>1</button>
-            <button id='b2'>2</button>
-            <button id='b3'>3</button>
-            <button id='mul'class="spec">x</button>
+            <button id='b1' type="button">1</button>
+            <button id='b2' type="button">2</button>
+            <button id='b3' type="button">3</button>
+            <button id='mul'class="spec" type="button">x</button>
             
-            <button id='comma'class="spec">,</button>
-            <button id='b0'>0</button>
-            <button id='enter'class="spec">=</button>
-            <button id='div'class="spec">/</button>
+            <button id='comma'class="spec" type="button">,</button>
+            <button id='b0' type="button">0</button>
+            <button id='enter'class="spec" type="button">=</button>
+            <button id='div'class="spec" type="button">/</button>
 
-            <button id='clear' style = 'grid-column: span 4;'class="spec">CLEAR</button>
+            <button id='clear' style = 'grid-column: span 4;'class="spec" type="button">CLEAR</button>
         </section>
     </div>
     </main>
-   
-   
+    <script src="js/script.js"></script> <!-- så html ska laddas först-->
 </body>
     <script>
         if('serviceWorker' in navigator) {

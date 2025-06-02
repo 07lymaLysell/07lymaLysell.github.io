@@ -47,6 +47,8 @@
   }
   #infoDisplay {
     visibility: hidden;
+    margin: 0;
+    padding: 0;
   }
   main section#keyBoard {
     width: 100%;
