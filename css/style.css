@@ -45,7 +45,9 @@
     border: 1px solid yellow;
     border-radius: 18px;
   }
-  
+  #infoDisplay {
+    visibility: hidden;
+  }
   main section#keyBoard {
     width: 100%;
     display: grid;
@@ -73,6 +75,7 @@
   button.spec {
     color: rgb(25, 201, 201);
   }
+
   
   @media (max-width: 767px) {
     body {
