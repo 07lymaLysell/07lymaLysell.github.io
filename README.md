@@ -1,22 +1,3 @@
-## PWA på github 
-
-Om ditt användarnamn är **bygren**  
-Skapa då ett repository som heter: **bygren**.github.io  
-Ladda upp hela ditt projekt.  
-
-## Skapa olika ikoner
-Oftas räcker det med en favicon.ico på 32x32 px och en ikon med storleken 512x512 px.  
-Blir dock bättre med flera png-ikoner.  
-
-## Font-family
-
-```css
-@font-face {
-    font-family: 'digitalDigits';
-    src: url('/font/SUBWT___.ttf') format('truetype');
-}
-```
-
-### Verktyg som gör om en ikon till olika storlekar
-
-https://tools.crawlink.com/tools/pwa-icon-generator/
+Hej detta är min readme fil,
+koden som gjorts är för det mesta dels min egna med hjälp av henrik själv till ex memclear och set operator, men mest själv
+Jag har tagit hjälp av w3 school, reddit och ai tjänster som copilot för korrigering och små fel som är svåra att se med blåta öggat. Har försökt att undvika hjälpmedel som chatgpt och sådant då jag inte litar på det och det tjändes fel. Men kanske använde det som hjälp när jag fastnade nån gång, minns inte. Har för det mesta dels använt reddit till calculator strukturen då jag hittade en person som använde den sortens priotieringsregler vilket jag tyckte verkade smidigt (han hette progschoolforlife443), så jag använde hans grund mall men har såklart modifierat den själv.bytade dess handling så det fungerade med min mall. W3school har jag också tagit mycket användning av till att förstå hur en mineräknares struktur bör se ut.

@@ -2,8 +2,8 @@
 
 window.onload = init; //inlet lcd = null;                   // Referens till displayfältet
 let isComma = false;              // anger om ett decimaltecken har lagts till
-let memory = 0;                   // (Ej aktiv) Tidigare sparat värde
-let arithmetic = null;            // Ej aktiv) Sparad operato
+//let memory = 0;                   // (Ej aktiv) Tidigare sparat värde
+//let arithmetic = null;            // Ej aktiv) Sparad operato
 let infoDisplay = null;           // Visar tidigare uträkning och resultat
 let calculationString = "";       // Håller hela uttrycket som en sträng
 
@@ -24,7 +24,7 @@ function buttonClick(e) {
     let btn = e.target.id;  // Hämtar id på den knapp som tryckts
 
     if (btn.substring(0, 1) === 'b') {  // läser endast bokstaven "b"
-        let digit = btn.substring(1, 2);  // Extraherar siffran från id:t, t.ex. b5 → "5"
+        let digit = btn.substring(1, 2);  // Extraherar siffran från id:t, t.ex. b5 till "5"
         addDigit(digit);
     } else {
         switch (btn) {
@@ -116,7 +116,7 @@ function calculate() {
                         break;
                     case '/':
                         if(right == 0){
-                            lcd.value = "division med noll";
+                            lcd.value = "division med noll";        //vanliga meddelande för division med noll
                             return;
                         }
                         result = left / right;
@@ -139,7 +139,7 @@ function calculate() {
         
     } catch (error){
         lcd.value = "error";
-        console.error("Beräkningsfel:", error);
+        console.error("Beräkningsfel:", error);  // loggar fel i konsollen för bekräftning
     }
 }
 
